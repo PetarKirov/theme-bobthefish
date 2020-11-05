@@ -37,6 +37,7 @@ This theme is based loosely on [agnoster][agnoster].
 
 ### The Prompt
 
+ * User-defined prefix (optional)
  * Status flags:
      * Previous command failed (**`!`**)
      * Private mode (**🔒** or **`⦸`**)
@@ -106,7 +107,8 @@ set -g theme_color_scheme dark
 set -g fish_prompt_pwd_dir_length 0
 set -g theme_project_dir_length 1
 set -g theme_newline_cursor yes
-set -g theme_newline_prompt '$ '
+set -g theme_prompt_prefix   '╭─'
+set -g theme_newline_prompt ' ╰─➤ '
 ```
 
 **Title options**
@@ -135,6 +137,7 @@ set -g theme_newline_prompt '$ '
 - `fish_prompt_pwd_dir_length`. bobthefish respects the Fish `$fish_prompt_pwd_dir_length` setting to abbreviate the prompt path. Set to `0` to show the full path, `1` (default) to show only the first character of each parent directory name, or any other number to show up to that many characters.
 - `theme_project_dir_length`. The same as `$fish_prompt_pwd_dir_length`, but for the path relative to the current project root. Defaults to `0`; set to any other number to show an abbreviated path.
 - `theme_newline_cursor`. Use `yes` to have cursor start on a new line. By default the prompt is only one line. When working with long directories it may be preferrend to have cursor on the next line. Setting this to `clean` instead of `yes` suppresses the caret on the new line.
+- `theme_prompt_prefix`. Display the contents of this variable at the start of the prompt (before the vi mode segment). By default this variable is unset (or empty), so this feature is not enabled.
 - `theme_newline_prompt`. Use a custom prompt with newline cursor. By default this is the chevron right glyph or `>` when powerline fonts are disabled.
 
 **Color scheme options**

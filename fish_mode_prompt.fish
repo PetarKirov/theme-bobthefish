@@ -1,4 +1,9 @@
-# Display the current binding mode... if it's vi or vi-like.
+# Display the user-defined prompt prefix and current binding mode... if it's vi
+# or vi-like.
+#
+# To configure the prompt prefix (in combination with the newline prompt):
+#     set -g theme_prompt_prefix   '╭─'
+#     set -g theme_newline_prompt ' ╰─➤ '
 #
 # To always show the binding mode (regardless of current bindings):
 #     set -g theme_display_vi yes
@@ -6,7 +11,20 @@
 # To never show:
 #     set -g theme_display_vi no
 
+function __bobthefish_prompt_user_prefix -S -d 'Display user-defined prefix'
+    [ -z "$theme_prompt_prefix" ]
+    and return
+
+    __bobthefish_colors $theme_color_scheme
+    __bobthefish_start_segment $color_hostname
+    echo -ns $theme_prompt_prefix ' '
+end
+
 function fish_mode_prompt -d 'bobthefish-optimized fish mode indicator'
+    # Note: When Fish builds the prompt it first calls `fish_mode_prompt`, so
+    # this is the only place where we can prepend the user prefix.
+    __bobthefish_prompt_user_prefix
+
     [ "$theme_display_vi" != 'no' ]
     or return
 
